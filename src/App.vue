@@ -69,6 +69,7 @@
                 <div class="control"> 
                   <button
                     class="button is-link"
+                    :disabled="!isFormValid"
                     @click="createActivity"
                   >
                     Create Activity
@@ -102,7 +103,8 @@
 
 <script>
 import ActivityItem from "@/components/ActivityItem.vue"
-import { fetchActivities } from "@/api"
+import { fetchActivities, fetchCategories, fetchUser } from "@/api"
+
 
 export default {
   name: 'App',
@@ -122,15 +124,14 @@ export default {
         1:{name:'Filip'}, 
         2:{name:'John'}
       },
-      user: {
-        name: 'Filip Jerga',
-        id: '-Aj34jknvncx98812',
-      },
+      user: {},
       activities: {},
-      categories: {
-        '1546969049': {text: 'books'},
-        '1546969225': {text: 'movies'}
-      }
+      categories: {}
+    }
+  },
+   computed:{
+    isFormValid (){
+    return this.newActivity.title && this.newActivity.notes
     }
   },
   beforeCreate(){
@@ -138,24 +139,10 @@ export default {
   },
   created(){
     this.activities = fetchActivities()
-  },
-  beforeMount(){
-    console.log('beforeMount called !!!');
-  },
-  mounted(){
-    console.log('mounted called !!!');
-  },
-  beforeUpdate(){
-    console.log('beforeUpdate called !!!');
-  },
-  updated(){
-    console.log('updated called !!!');
-  },
-  beforeDestry(){
-    console.log('beforeDestroy called !!!');
-  },
-  destroyed(){
-    console.log('destroyed called !!!');
+    this.categories = fetchCategories()
+    this.user = fetchUser()
+    console.log(this.user)
+    console.log(this.categories)
   },
   methods: {
     toggleTextDisplayed (){
@@ -166,7 +153,7 @@ export default {
     },
     createActivity (){
       console.log(this.newActivity);
-    }
+    },
   }
 }
 </script>
