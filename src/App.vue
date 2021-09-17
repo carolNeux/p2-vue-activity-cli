@@ -4,7 +4,6 @@
       <div class="container">
         <div class="navbar-brand">
           <h1> {{ fullAppName }} </h1>
-          <!-- <h1>{{ watchAppName }}</h1> -->
         </div>
       </div>
     </nav>
@@ -66,6 +65,28 @@
                   />
                 </div>
               </div>
+              <div class="field">
+                <label class="label">Notes</label>
+                <div class="control">
+                  <select 
+                    v-model="newActivity.category" 
+                    
+                    class="select"
+                  >
+                    <option 
+                      disabled 
+                      value=""
+                    >
+                      Please select one
+                    </option>
+                    <option 
+                      v-for="category in categories"
+                    > 
+                      {{ category.text }}
+                    </option>
+                  </select>
+                </div>
+              </div>
               <div class="field is-grouped">
                 <div class="control"> 
                   <button
@@ -122,7 +143,8 @@ export default {
       watchAppName:'Activity Planner by Filip Jerga',
       newActivity:{
         title:'',
-        notes:''
+        notes:'',
+        category:''
       },
       // items:[1,2,3,4,5,6],
       items:{
