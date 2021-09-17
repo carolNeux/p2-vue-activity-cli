@@ -68,21 +68,14 @@
               <div class="field">
                 <label class="label">Notes</label>
                 <div class="control">
-                  <select 
-                    v-model="newActivity.category" 
-                    
-                    class="select"
-                  >
-                    <option 
-                      disabled 
-                      value=""
-                    >
+                  <select v-model="newActivity.category" class="select">
+                    <option disabled value="">
                       Please select one
                     </option>
-                    <option 
-                      v-for="category in categories"
-                    > 
-                      {{ category.text }}
+                    <option v-for="category in categories" 
+                            :key="category.id"
+                    >
+                      {{ category.text}}
                     </option>
                   </select>
                 </div>
