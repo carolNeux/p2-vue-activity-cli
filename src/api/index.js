@@ -1,10 +1,9 @@
 
 
-
-export const fetchActivities =() => {
+export const fetchActivities = () => {
   return {
     '1546968934': {
-      id:'1546968934',
+      id: '1546968934',
       title: 'Learn Vue.js',
       notes: 'I started today and it was not good.',
       progress: 0,
@@ -13,34 +12,27 @@ export const fetchActivities =() => {
       updatedAt: 1546969144391
     },
     '1546969212': {
-      id:'1546969212',
+      id: '1546969212',
       title: 'Read Witcher Books',
       notes: 'These books are super nice',
       progress: 0,
       category: '1546969049',
       createdAt: 1546969144391,
       updatedAt: 1546969144391
-    },
-    '1546969212': {
-      id:'1546969212',
-      title: 'Read Witcher Books',
-      notes: 'These books are super nice',
-      progress: 0,
-      category: '1546969049',
-      createdAt: 1546969144391,
-      updatedAt: 1546969144391
-    },
+    }
   }
 }
-export const fetchCategories =()=>{
+
+export const fetchCategories = () => {
   return {
-    '1546969049': {text: 'books'},
-    '1546969225': {text: 'movies'}
+    '1546969049': {text: 'books', id: '1546969049'},
+    '1546969225': {text: 'movies', id: '1546969225'}
   }
 }
-export const fetchUser =()=>{
+
+export const fetchUser = () => {
   return {
     name: 'Filip Jerga',
-    id: '-Aj34jknvncx98812'
+    id: '-Aj34jknvncx98812',
   }
 }

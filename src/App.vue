@@ -96,7 +96,7 @@
               :activity="activity"
             />
             <div class="activity-length">
-              Currently {{ activityLength }} activities
+              Currently {{ activityLength }} acitvities
             </div>
             <div class="activity-motivation">
               {{ activityMotivation }}
@@ -111,8 +111,6 @@
 <script>
 import ActivityItem from "@/components/ActivityItem.vue"
 import { fetchActivities, fetchCategories, fetchUser } from "@/api"
-
-
 export default {
   name: 'App',
   components: {ActivityItem},
@@ -144,15 +142,15 @@ export default {
       return this.appName + ' by ' + this.creator
     },
     activityLength(){
-      return Object.keys(this.activities).length;
+      return Object.keys(this.activities).length
     },
-    activityMotivation() {
-      if(this.activityLength && this.activityLength < 5){
-        return 'Nice to see some activities :)'
-      } else if (this.activityLength >= 5){
-        return 'So many activities, Good Job !!'
-      } else{
-        return 'No activities, so sad :('
+    activityMotivation(){
+      if (this.activityLength < 5){
+        return 'Nice to see some activities (:'
+      } else if(this.activityLength >= 5){
+      return 'So many activities, Good Job !!'
+      } else {
+        return 'No activities, so sad ):'
       }
     }
   },
@@ -180,7 +178,6 @@ export default {
   color: #2c3e50;
   background: #F2F6FA;
 }
-
 html,body {
   font-family: 'Open Sans', serif;
   background: #F2F6FA;
@@ -188,11 +185,11 @@ html,body {
 footer {
   background-color: #F2F6FA !important;
 }
+.activity-length{
+display: inline-block;
+}
 .activity-motivation{
 float: right;
-}
-.activity-length {
-display: inline-block;
 }
 .example-wrapper{
   margin-left:30px;
@@ -249,10 +246,8 @@ article.post:last-child {
 .menu-list li{
   padding: 5px;
 }
-
 .navbar-brand > h1 {
   font-size: 31px;
   padding: 20px;
 }
-
 </style>
