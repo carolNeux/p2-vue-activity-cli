@@ -20,7 +20,16 @@ export const fetchActivities =() => {
       category: '1546969049',
       createdAt: 1546969144391,
       updatedAt: 1546969144391
-    }
+    },
+    '1546969212': {
+      id:'1546969212',
+      title: 'Read Witcher Books',
+      notes: 'These books are super nice',
+      progress: 0,
+      category: '1546969049',
+      createdAt: 1546969144391,
+      updatedAt: 1546969144391
+    },
   }
 }
 export const fetchCategories =()=>{

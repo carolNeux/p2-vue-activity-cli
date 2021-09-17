@@ -95,6 +95,12 @@
               :key="activity.id"
               :activity="activity"
             />
+            <div class="activity-length">
+              Currently {{ activityLength }} activities
+            </div>
+            <div class="activity-motivation">
+              {{ activityMotivation }}
+            </div>
           </div>
         </div>
       </div>
@@ -136,16 +142,20 @@ export default {
     },
     fullAppName(){
       return this.appName + ' by ' + this.creator
+    },
+    activityLength(){
+      return Object.keys(this.activities).length;
+    },
+    activityMotivation() {
+      if(this.activityLength && this.activityLength < 5){
+        return 'Nice to see some activities :)'
+      } else if (this.activityLength >= 5){
+        return 'So many activities, Good Job !!'
+      } else{
+        return 'No activities, so sad :('
+      }
     }
   },
-    // watch: {
-    //   creator(val){
-    //     this.watchAppName = this.appName + ' by ' + val
-    //   },
-    //   appName(val){ 
-    //    this.watchAppName = val + ' by ' + this.creator
-    //   }
-    // },
   created(){
     this.activities = fetchActivities()
     this.categories = fetchCategories()
@@ -177,6 +187,12 @@ html,body {
 }
 footer {
   background-color: #F2F6FA !important;
+}
+.activity-motivation{
+float: right;
+}
+.activity-length {
+display: inline-block;
 }
 .example-wrapper{
   margin-left:30px;
