@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import Vue from 'vue'
+
 import ActivityItem from "@/components/ActivityItem.vue"
 import ActivityCreate from "@/components/ActivityCreate.vue"
 import { fetchActivities, fetchCategories, fetchUser } from "@/api"
@@ -96,6 +98,8 @@ export default {
   },
   methods: {
     addActivity(newActivity){
+      Vue.set(this.activities, newActivity.id, newActivity)
+      debugger
       console.log(newActivity)
     }
   }

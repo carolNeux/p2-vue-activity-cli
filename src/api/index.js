@@ -23,15 +23,18 @@ export const fetchActivities = () => {
   }
 }
 
-const generateUid = () => Math.floor(newDate () * Math.random())
+const generateUid = () => Math.floor(new Date () * Math.random())
 
-export const createActivity = (activity) => {
+
+export const createActivityAPI = (activity) => {
 activity.id = generateUid()
 activity.progress = 0
 activity.createdAt = new Date()
 activity.updatedAt = new Date()
 
-return activity
+return new Promise((resolve, reject) => {
+  resolve(activity)
+})
 }
 
 export const fetchCategories = () => {

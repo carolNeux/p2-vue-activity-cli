@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import { createActivity } from '@/api'
+import { createActivityAPI } from '@/api'
   export default {
     props: {
       categories: {
@@ -101,8 +101,10 @@ import { createActivity } from '@/api'
         this.isFormDisplayed = !this.isFormDisplayed
       },
       createActivity () {
-        const activity = createActivity(this.newActivity)
-        this.$emit('activityCreated', {...activity})
+        createActivityAPI(this.newActivity)
+          .then(activity => {
+            this.$emit('activityCreated', {...activity})
+          })
       }
     }
   }
