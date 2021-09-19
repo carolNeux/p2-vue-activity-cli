@@ -30,7 +30,7 @@
     <section class="container">
       <div class="columns">
         <div class="column is-3">
-          <ActivityCreate :categories="categories" />
+          <ActivityCreate :categories="categories" @activityCreated="addActivity" />
         </div>
         <div class="column is-9">
           <div class="box content">
@@ -63,8 +63,6 @@ export default {
     return {
       creator:'Filip Jerga',
       appName:'Activity Planner',
-      // watchAppName:'Activity Planner by Filip Jerga',
-      // items:[1,2,3,4,5,6],
       items:{
         1:{name:'Filip'}, 
         2:{name:'John'}
@@ -97,6 +95,9 @@ export default {
     this.user = fetchUser()
   },
   methods: {
+    addActivity(newActivity){
+      console.log(newActivity)
+    }
   }
 }
 </script>
