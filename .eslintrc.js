@@ -12,6 +12,6 @@ module.exports = {
     'vue/singleline-html-element-content-newline':0,
     'vue/max-attributes-per-line':0,
     'vue/html-closing-bracket-newline':0,
-    'vue/mustache-interpolation-spacing':0
+    // 'vue/mustache-interpolation-spacing':0
   }
 }
