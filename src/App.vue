@@ -33,17 +33,24 @@
           <ActivityCreate :categories="categories" @activityCreated="addActivity" />
         </div>
         <div class="column is-9">
-          <div class="box content">
-            <ActivityItem
-              v-for="activity in activities" 
-              :key="activity.id"
-              :activity="activity"
-            />
-            <div class="activity-length">
-              Currently {{ activityLength }} acitvities
+          <div class="box content" 
+              :class="{fecthing: isFetching, 'has-error':error}">
+              <div v-if="error">{{ error }}</div>
+              <div v-else> 
+                <div v-if="isFetching"> Loading...</div>
+                <ActivityItem
+                  v-for="activity in activities" 
+                  :key="activity.id"
+                  :activity="activity"
+                />
+             </div>
+             <div v-if="!isFetching"> 
+              <div class="activity-length">
+                Currently {{ activityLength }} acitvities
+              </div>
+              <div class="activity-motivation">
+                {{ activityMotivation }}
             </div>
-            <div class="activity-motivation">
-              {{ activityMotivation }}
             </div>
           </div>
         </div>
@@ -65,10 +72,8 @@ export default {
     return {
       creator:'Filip Jerga',
       appName:'Activity Planner',
-      items:{
-        1:{name:'Filip'}, 
-        2:{name:'John'}
-      },
+      isFetching: false,
+      error: null,
       user: {},
       activities: {},
       categories: {}
@@ -92,12 +97,15 @@ export default {
     }
   },
   created(){
+    this.isFetching = true
     fetchActivities()
     .then(activities => {
       this.activities = activities
+      this.isFetching = false
     })
     .catch(err => {
-      console.log(err)
+      this.error = err
+      this.isFetching = false
     })
     this.categories = fetchCategories()
     this.user = fetchUser()
@@ -124,6 +132,12 @@ html,body {
 }
 footer {
   background-color: #F2F6FA !important;
+}
+.fecthing{
+  border: 2px solid orange;
+}
+.has-error{
+  border: 2px solid red;
 }
 .activity-length{
 display: inline-block;
