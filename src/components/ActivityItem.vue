@@ -1,7 +1,7 @@
 <template>
   <article class="post">
     <h4 class="title">{{ activity.title }}</h4>
-    <p>{{ categories[activity.category].text }}</p>
+    <p>{{ capitilize(categories[activity.category].text) }}</p>
     <p>{{ activity.notes }}</p>
     <div class="media">
       <div class="media-left">
@@ -50,6 +50,13 @@ export default {
           return 'orange'
         }
         else {return 'green'}
+    }
+  },
+  methods: {
+    capitilize(word){
+      if(word && typeof 'string'){
+        return word.charAt(0).toUpperCase() + word.slice(1)
+      }
     }
   }
 }
