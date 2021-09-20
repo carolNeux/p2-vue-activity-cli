@@ -23,6 +23,7 @@
                 v-for="activity in activities" 
                 :key="activity.id"
                 :activity="activity"
+                :categories="categories"
               />
             </div>
             <div v-if="!isFetching"> 

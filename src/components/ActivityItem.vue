@@ -1,6 +1,8 @@
 <template>
   <article class="post">
-    <h4>{{ activity.title }}</h4>
+    <h4 class="title">{{ activity.title }}</h4>
+    <p>{{ categories[activity.category].text }}</p>
+    <p>{{ activity.notes }}</p>
     <div class="media">
       <div class="media-left">
         <p class="image is-32x32">
@@ -30,6 +32,10 @@
 
 export default {
   props: {
+    categories: {
+      type: Object,
+      required: true
+    },
     activity: {
       type: Object,
       required: true
@@ -49,13 +55,7 @@ export default {
 }
 </script>
 <style scoped>
-/* .color-red{
-  color: red;
+.title{
+  margin-bottom: 5px;
 }
-.color-orange{
-  color:orange;
-}
-.color-green{
-  color:green;
-} */
 </style>

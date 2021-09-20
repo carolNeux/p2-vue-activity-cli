@@ -34,7 +34,7 @@ export const fetchActivities = () => {
       } else {
         reject('Cannot fetch activities')
       }
-    }, 2000)
+    }, 500)
   })
 }
 
