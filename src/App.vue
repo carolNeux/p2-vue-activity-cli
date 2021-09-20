@@ -7,26 +7,7 @@
         </div>
       </div>
     </nav>
-    <nav class="navbar is-white">
-      <div class="container">
-        <div class="navbar-menu">
-          <div class="navbar-start">
-            <a
-              class="navbar-item is-active"
-              href="#"
-            >Newest</a>
-            <a
-              class="navbar-item"
-              href="#"
-            >In Progress</a>
-            <a
-              class="navbar-item"
-              href="#"
-            >Finished</a>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <TheNavbar />
     <section class="container">
       <div class="columns">
         <div class="column is-3">
@@ -34,23 +15,23 @@
         </div>
         <div class="column is-9">
           <div class="box content" 
-              :class="{fecthing: isFetching, 'has-error':error}">
-              <div v-if="error">{{ error }}</div>
-              <div v-else> 
-                <div v-if="isFetching"> Loading...</div>
-                <ActivityItem
-                  v-for="activity in activities" 
-                  :key="activity.id"
-                  :activity="activity"
-                />
-             </div>
-             <div v-if="!isFetching"> 
+               :class="{fecthing: isFetching, 'has-error':error}">
+            <div v-if="error">{{ error }}</div>
+            <div v-else> 
+              <div v-if="isFetching"> Loading...</div>
+              <ActivityItem
+                v-for="activity in activities" 
+                :key="activity.id"
+                :activity="activity"
+              />
+            </div>
+            <div v-if="!isFetching"> 
               <div class="activity-length">
                 Currently {{ activityLength }} acitvities
               </div>
               <div class="activity-motivation">
                 {{ activityMotivation }}
-            </div>
+              </div>
             </div>
           </div>
         </div>
@@ -64,10 +45,12 @@ import Vue from 'vue'
 
 import ActivityItem from "@/components/ActivityItem.vue"
 import ActivityCreate from "@/components/ActivityCreate.vue"
+import TheNavbar from "@/components/TheNavbar.vue"
+
 import { fetchActivities, fetchCategories, fetchUser } from "@/api"
 export default {
   name: 'App',
-  components: {ActivityItem, ActivityCreate},
+  components: {ActivityItem, ActivityCreate, TheNavbar},
   data (){
     return {
       creator:'Filip Jerga',
