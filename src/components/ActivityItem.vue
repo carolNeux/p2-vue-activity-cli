@@ -12,14 +12,12 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <a href="#">Filip Jerga</a> updated {{ activity.updatedAt }} minutes ago &nbsp;
+            <a href="#">Filip Jerga</a> updated {{ activity.updatedAt | prettyTime}} &nbsp;
           </p>
         </div>
       </div>
       <div class="media-right">
         <span>Progress: 
-          <!-- <span :class="'color-'+ activityProgress"> {{ activity.progress }} %
-          </span> -->
           <span :style="{'color': activityProgress}"> {{ activity.progress }} %
           </span>
         </span>
