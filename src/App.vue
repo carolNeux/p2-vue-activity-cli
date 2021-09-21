@@ -91,8 +91,9 @@ export default {
       this.error = err
       this.isFetching = false
     })
-    this.categories = fetchCategories()
-    this.user = fetchUser()
+    this.categories = fetchCategories().then(categories =>{
+      this.categories = categories
+    })
   },
   methods: {
     addActivity(newActivity){
