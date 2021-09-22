@@ -1,6 +1,9 @@
 <template>
   <article class="post">
-    <h4 class="title">{{ activity.title }}</h4>
+    <div class="activity-title-wrapper">
+      <h4 class="activity-title">{{ activity.title }}</h4>
+      <i class="fas fa-cog activity-settings" @click="isMenuDisplayed = !isMenuDisplayed" />
+    </div>
     <p>{{ textUtility_capitilize(categories[activity.category].text) }}</p>
     <p>{{ activity.notes }}</p>
     <div class="media">
@@ -12,7 +15,7 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <a href="#">Filip Jerga</a> updated {{ activity.updatedAt | prettyTime}} &nbsp;
+            <a href="#">Filip Jerga</a> updated {{ activity.updatedAt | prettyTime }} &nbsp;
           </p>
         </div>
       </div>
@@ -23,8 +26,10 @@
         </span>
       </div>
     </div>
-    <!-- {{ utilityName }}
-    {{ creator }} -->
+    <div v-if="isMenuDisplayed" class="activity-controll">
+      <a class="button is-warning">Edit</a>
+      <a class="button is-danger" @click="deleteActivity">Delete</a>
+    </div>
   </article>
 </template>
 <script>
@@ -42,6 +47,11 @@ export default {
       required: true
     }
   },
+   data () {
+      return {
+        isMenuDisplayed: false,
+      }
+    },
   computed: {
     activityProgress() {
       const progress = this.activity.progress
@@ -53,6 +63,11 @@ export default {
         else {return 'green'}
     }
   },
+  methods:{
+    deleteActivity(){
+      this.$emit('activityDeleted', this.activity)
+    }
+  }
   
 }
 </script>
@@ -60,4 +75,22 @@ export default {
 .title{
   margin-bottom: 5px;
 }
+.activity-title {
+  margin-bottom: 5px;
+  display: inline-block;
+}
+.activity-settings {
+  float: right;
+  font-size: 22px;
+}
+.activity-settings:hover {
+    cursor: pointer;
+  }
+.activity-controll {
+  margin: 20px 0 0 0;
+  margin-right: 5px;
+}
+ .button {
+    margin-right: 5px;
+  }
 </style>
