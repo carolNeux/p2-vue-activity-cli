@@ -37,13 +37,13 @@ class FakeApi{
     
     get(resource, {force = 0}){
       return new Promise((resolve, reject) => {
-        setTimeout(() => {
+        this.asyncCall(() => {
           if (force || this.canContinue()){
             resolve({...data[resource]})
           } else {
             reject('Cannot fetch' + resource)
           }
-        }, 500)
+        })
       })
     }
 
@@ -52,6 +52,10 @@ class FakeApi{
         data[resource][item.id] = item
         resolve(item)
       })
+    }
+
+    asyncCall(cb){
+      setTimeout(cb, 500)
     }
 }
 
