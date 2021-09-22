@@ -1,5 +1,5 @@
 <template>
-  <div id="activityApp"> 
+  <div v-if="isDataLoaded" id="activityApp"> 
     <nav class="navbar is-white topNav">
       <div class="container">
         <div class="navbar-brand">
@@ -59,8 +59,8 @@ export default {
       isFetching: false,
       error: null,
       user: {},
-      activities: {},
-      categories: {}
+      activities: null,
+      categories: null
     }
   },
    computed:{
@@ -78,6 +78,9 @@ export default {
       } else {
         return 'No activities, so sad ):'
       }
+    },
+    isDataLoaded(){
+      return this.activities && this.categories
     }
   },
   created(){
