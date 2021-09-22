@@ -17,6 +17,8 @@ export const fetchUser = () => {
   }
 }
 
+
+
 export const createActivityAPI = (activity) => {
 activity.id = generateUid()
 activity.progress = 0
@@ -24,4 +26,8 @@ activity.createdAt = new Date()
 activity.updatedAt = new Date()
 
 return fakeApi.post('activities', activity)
+}
+
+export const deleteActivityAPI = (activity) => {
+  return fakeApi.delete('activities', activity)
 }
