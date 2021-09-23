@@ -11,7 +11,7 @@
     <section class="container">
       <div class="columns">
         <div class="column is-3">
-          <ActivityCreate :categories="categories" @activityCreated="addActivity" />
+          <ActivityCreate :categories="categories" />
         </div>
         <div class="column is-9">
           <div class="box content" 
@@ -24,7 +24,6 @@
                 :key="activity.id"
                 :activity="activity"
                 :categories="categories"
-                @activityDeleted="handleActivityDelete"
               />
             </div>
             <div v-if="!isFetching"> 
@@ -49,7 +48,6 @@ import store from './store'
 import ActivityItem from "@/components/ActivityItem.vue"
 import ActivityCreate from "@/components/ActivityCreate.vue"
 import TheNavbar from "@/components/TheNavbar.vue"
-
 
 // import { fetchActivities, fetchCategories, fetchUser, deleteActivityAPI} from "@/api"
 export default {
@@ -102,17 +100,6 @@ export default {
       .then(categories =>{
       })
   },
-  methods: {
-    addActivity(newActivity){
-      Vue.set(this.activities, newActivity.id, newActivity)
-    },
-    handleActivityDelete(activity){
-      store.deleteActivityAPI(activity)
-      .then(deletedActivity => {
-        Vue.delete(this.activities, deletedActivity.id)
-      })
-    }
-  }
 }
 </script>
 

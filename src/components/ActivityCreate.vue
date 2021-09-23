@@ -74,7 +74,8 @@
 </template>
 
 <script>
-import { createActivityAPI } from '@/api'
+import store from '@/store'
+
   export default {
     props: {
       categories: {
@@ -109,11 +110,10 @@ import { createActivityAPI } from '@/api'
         this.newActivity.category = ''
       },
       createActivity () {
-        createActivityAPI({...this.newActivity})
+        store.createActivity({...this.newActivity})
           .then(activity => {
-            this.resetActivity ()
+            this.resetActivity()
             this.isFormDisplayed = false
-            this.$emit('activityCreated', {...activity})
           })
       }
     }
