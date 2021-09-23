@@ -83,7 +83,6 @@
 <style scoped>
   .title{
     margin-bottom: 10px;
-    display: inline-block;
   }
   .activity-title {
     margin-bottom: 10px;
@@ -98,7 +97,6 @@
   .activity-settings {
     float: right;
     font-size: 22px;
-    background-color:hotpink;
   }
   .activity-settings:hover {
       cursor: pointer;

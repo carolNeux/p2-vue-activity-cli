@@ -44,6 +44,7 @@
 
 <script>
 import Vue from 'vue'
+import store from './store'
 
 import ActivityItem from "@/components/ActivityItem.vue"
 import ActivityCreate from "@/components/ActivityCreate.vue"
