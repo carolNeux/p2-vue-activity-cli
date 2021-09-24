@@ -53,7 +53,7 @@ const store = {
       })
   },
 
-  updateActivity (activity) {
+  updateActivity(activity) {
     activity.updatedAt = new Date()
 
     return fakeApi.post('activities', activity)
