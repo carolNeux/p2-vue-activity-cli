@@ -1,40 +1,40 @@
 <template>
-  <div id="activityApp"> 
+  <div id="activityApp">
     <nav class="navbar is-white topNav">
       <div class="container">
         <div class="navbar-brand">
-          <h1> {{ fullAppName }} </h1>
+          <h1>{{ fullAppName }}</h1>
         </div>
       </div>
     </nav>
-    <TheNavbar />
+    <TheNavbar @filterSelected="setFilter" />
     <section class="container">
       <div class="columns">
         <div class="column is-3">
           <ActivityCreate :categories="categories" />
         </div>
         <div class="column is-9">
-          <div class="box content" 
-               :class="{fecthing: isFetching, 'has-error':error}">
-            <div v-if="error">{{ error }}</div>
-            <div v-else> 
-              <div v-if="isFetching"> Loading...</div>
-              <div v-if="isDataLoaded"> 
+          <div class="box content"
+               :class="{fetching: isFetching, 'has-error': error}">
+            <div v-if="error">
+              {{ error }}
+            </div>
+            <div v-else>
+              <div v-if="isFetching">
+                Loading ...
+              </div>
+              <div v-if="isDataLoaded">
                 <ActivityItem
-                  v-for="activity in activities" 
+                  v-for="activity in filteredActivities"
                   :key="activity.id"
                   :activity="activity"
                   :categories="categories"
                 />
               </div>
             </div>
-            <div v-if="!isFetching"> 
-              <div class="activity-length">
-                Currently {{ activityLength }} acitvities
-              </div>
-              <div class="activity-motivation">
-                {{ activityMotivation }}
-              </div>
+            <div v-if="!isFetching">
+              <div class="activity-length">Currenly {{ activityLength }} activities</div>
+              <div class="activity-motivation">{{ activityMotivation }}</div>
             </div>
           </div>
         </div>
@@ -46,72 +46,81 @@
 <script>
 import Vue from 'vue'
 import store from './store'
-
-import ActivityItem from "@/components/ActivityItem.vue"
-import ActivityCreate from "@/components/ActivityCreate.vue"
-import TheNavbar from "@/components/TheNavbar.vue"
-
-// import { fetchActivities, fetchCategories, fetchUser, deleteActivityAPI} from "@/api"
+import ActivityItem from '@/components/ActivityItem'
+import ActivityCreate from '@/components/ActivityCreate'
+import TheNavbar from '@/components/TheNavbar'
+// import { fetchActivities, fetchUser, fetchCategories, deleteActivityAPI } from '@/api'
 import fakeApi from '@/lib/fakeApi'
 export default {
   name: 'App',
   components: {ActivityItem, ActivityCreate, TheNavbar},
-  data (){
-    const { state: {activities, categories} } = store
+  data () {
+    const { state: {activities, categories}} = store
     return {
-      creator:'Filip Jerga',
-      appName:'Activity Planner',
+      creator: 'Filip Jerga',
+      appName: 'Activity Planner',
       isFetching: false,
       error: null,
       user: {},
       activities,
-      categories
+      categories,
+      filter: 'all'
     }
   },
-   computed:{
-    fullAppName(){
+  computed: {
+    filteredActivities () {
+      if (this.filter === 'all') {
+        return this.activities
+      }
+      return this.activities;
+    },
+    fullAppName () {
       return this.appName + ' by ' + this.creator
     },
-    activityLength(){
+    activityLength () {
       return Object.keys(this.activities).length
     },
-    activityMotivation(){
-      if (this.activityLength < 5){
+    activityMotivation () {
+      if (this.activityLength && this.activityLength < 5) {
         return 'Nice to see some activities (:'
-      } else if(this.activityLength >= 5){
-      return 'So many activities, Good Job !!'
+      } else if (this.activityLength >= 5) {
+        return 'So many activities! Good Job!'
       } else {
-        return 'No activities, so sad ):'
+        return 'No activities, so sad :('
       }
     },
-    activitiesLength(){
+    activitiesLength () {
       return Object.keys(this.activities).length
     },
-    categoriesLength(){
+    categoriesLength () {
       return Object.keys(this.categories).length
     },
-    isDataLoaded(){
+    isDataLoaded () {
       return this.activitiesLength && this.categoriesLength
     }
   },
-  created(){
-    // ONLY RUN ONCE TO POPULATE LOCAL STORAGE!!!
+  created () {
+    // ONLY RUN ONE TO POPULATE LOCAL STORAGE!!!!!
     // fakeApi.fillDB()
-
     this.isFetching = true
     store.fetchActivities()
       .then(activities => {
         this.isFetching = false
-    })
-    .catch(err => {
-      this.error = err
-      this.isFetching = false
-    })
+      })
+      .catch(err => {
+        this.error = err
+        this.isFetching = false
+      })
     this.user = store.fetchUser()
     store.fetchCategories()
-      .then(categories =>{
-      })
+      .then(categories => {
+    })
   },
+  methods: {
+    setFilter (filterOption) {
+      this.filter = filterOption
+    }
+  }
 }
 </script>
 

@@ -52,7 +52,7 @@ class FakeApi{
       return new Promise((resolve, reject) => {
         this.asyncCall(() => {
           if (force || this.canContinue()){
-            const data =this.getData();
+            const data = this.getData();
             resolve({...data[resource]})
           } else {
             reject('Cannot fetch' + resource)
