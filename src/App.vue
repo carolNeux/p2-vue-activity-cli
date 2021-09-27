@@ -51,6 +51,7 @@ import ActivityCreate from '@/components/ActivityCreate'
 import TheNavbar from '@/components/TheNavbar'
 // import { fetchActivities, fetchUser, fetchCategories, deleteActivityAPI } from '@/api'
 import fakeApi from '@/lib/fakeApi'
+
 export default {
   name: 'App',
   components: {ActivityItem, ActivityCreate, TheNavbar},
@@ -68,12 +69,33 @@ export default {
     }
   },
   computed: {
-    filteredActivities () {
+        filteredActivities () {
+      let filteredActivities = {}
+      let condition
+      debugger
       if (this.filter === 'all') {
         return this.activities
       }
-      return this.activities;
+      if (this.filter === 'inprogress') {
+        condition = (value) => value > 0 && value < 100
+        // condition = function (value) {
+        //   if (value > 0 && value < 100) {
+        //     return true
+        //   } else
+        //   return false
+        // }
+      } else if (this.filter === 'finished') {
+        condition = (value) => value === 100
+      } else {
+        condition = (value) => value === 0
+      }
+      filteredActivities = Object.values(this.activities)
+        .filter(activity => {
+          return condition(activity.progress)
+        })
+      return filteredActivities;
     },
+
     fullAppName () {
       return this.appName + ' by ' + this.creator
     },
